@@ -1,16 +1,14 @@
  @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@1,300&display=swap');
  @import url('https://fonts.googleapis.com/css2?family=Rubik+Burned&display=swap');
  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=Play&display=swap');
+
 
  body{
     background: linear-gradient(180deg, #2a06af 0%, #720995 100%);
     background-repeat: no-repeat;
     display:flex;
     flex-direction: column;
-    /* align-items: center;
-    justify-content: center; */
-    height: 100vh;
+    height: 150vh;
     width: 100vw;
     margin: 0;
     padding: 0;
@@ -20,26 +18,16 @@
 
  }
 
-/* .container{
+ #score{
     display:flex;
-    flex-direction:column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    width: 100vw;
-    margin: 0;
-    padding: 0;
-} */
- .score{
- display:flex;
- flex-direction:row;
- gap:30px;
- margin:0;
- padding:10px;
- font-family: 'Rubik Burned', sans-serif;
- color:#720995;
- font-size: 48px;
- font-weight: bold;
+    flex-direction:row;
+    gap:30px;
+    margin:0;
+    padding:10px;
+    font-family: 'Rubik Burned', sans-serif;
+    color:#720995;
+    font-size: 48px;
+    font-weight: bold;
 
  }
 
@@ -76,12 +64,12 @@
     border:0;
 }
 .min{
-display:flex;
-gap:30px;
+    display:flex;
+    gap:30px;
 }
 .max{
-display:flex;
-gap:30px;
+    display:flex;
+    gap:30px;
 }
 
 #text{
@@ -93,7 +81,7 @@ gap:30px;
     font-size:24px;
     color:#3F704D;
  }
-  #guess{
+#guess{
     display:flex;
     flex-direction:column;
     gap:10px;
@@ -104,7 +92,8 @@ gap:30px;
     color:#3F704D;
      font-family:'Press Start 2P', sans-serif;
  }
- #submit{
+ 
+#submit{
     border-radius:10px;
     height:40px;
     width:200px;
@@ -113,7 +102,7 @@ gap:30px;
     font-size:20px;
     font-weight:bold;
     margin-top:30px;
-    background-color: #720995 ;
+    background-color:  #720995 ;
 }
 
 #submit:hover{
@@ -122,13 +111,23 @@ gap:30px;
     cursor:pointer;
 }
 
- #guessSubmit{
+#guessSubmit{
     border-radius:7px;
     height:30px;
     width:120px;
     border:1px solid grey;
-    background-color: #2a06af ;
+    background-color: #720995 ;
     color:#3F704D;
     font-size:20px;
     font-weight:bold;
 }
+
+#results{
+    display:flex;
+    margin-top: 20px;
+    justify-content: center;
+    align-items: center;
+    font-family:'Press Start 2P', sans-serif;
+    font-size:24px;
+    color:#3F704D;
+ }

@@ -1,23 +1,28 @@
-let min = document.getElementById("min");
-let max = document.getElementById("max");
-let guessField = document.getElementById("guessField");
-let text = document.getElementById("text");
-let guess = document.getElementById("guess");
-let submit = document.getElementById("submit");
-let guessSubmit = document.getElementById("guessSubmit");
 
-let guessOutput;
-// let lives = 5;
+  let min = document.getElementById("min");
+  let max = document.getElementById("max");
+  let guessField = document.getElementById("guessField");
+  let text = document.getElementById("text");
+  let guess = document.getElementById("guess");
+  let submit = document.getElementById("submit");
+  let guessedVal = document.getElementById("guessedVal");
+  let livesDisplay = document.getElementById("scoreText");
 
-let randomInRange = (minimum, maximum) => {
+ 
+  let guessOutput;
+  let lives = 5;
+  
+
+  let randomInRange = (minimum, maximum) => {
     minimum = Math.ceil(minimum);
     maximum = Math.floor(maximum);
-    guessOutput = Math.floor(Math.random() * (maximum - minimum + 1) + minimum);
-}
+    return Math.floor(Math.random() * (maximum - minimum + 1) + minimum);
+  };
 
-let askRange = () => {
+  let askRange = () => {
     let minVal = Number(min.value);
     let maxVal = Number(max.value);
+    guessOutput = randomInRange(minVal, maxVal);
 
     text.innerHTML += `
       <div>
@@ -29,53 +34,65 @@ let askRange = () => {
      <div>
             <label for="guessField">Enter a guess: </label>
             <input type="text" id="guessField" class="guessField">
-            <button id="guessSubmit" type="submit">Guess</button>
-        </div>
-
-        <div>
-        <p></p>
+            <button id="guessSubmit">Guess</button>
         </div>
     `;
-        
-}
 
-let askGuess = number => {
+    let guessField = document.getElementById("guessField");
+    let guessSubmit = document.getElementById("guessSubmit");
+
+   
+    guessSubmit.addEventListener("click", function () {
+      checkGuess(guessField.value);
+    });
+  };
+
+  let askGuess = (number) => {
     switch (true) {
-        case guessOutput > number:
-            // console.log("Too low");
-            return false;
-            break;
-        case guessOutput < number:
-            // console.log("Too high");
-            return false;
-            break;
-        case guessOutput === number:
-            // console.log("Correct");
-            return true;
-            break;    
+      case guessOutput > number:
+        guessedVal.innerHTML += `
+            <div id = "results">
+           <p> The value ${number} is too low. Try again.</p>
+           </div>
+           `;
+        lives--;
+        break;
+      case guessOutput < number:
+        guessedVal.innerHTML += `
+            <div id = "results">
+            <p> The value ${number} is too high. Try again. </p>
+            </div>
+            `;
+        lives--;
+        break;
+      case guessOutput === number:
+        guessedVal.innerHTML += `
+            <div id = "results">
+            <p> The value ${number} is correct. You Won!!! </p>
+            </div>`;
+        lives = 0;
+        break;
     }
-}
+      livesDisplay.textContent = `Remaining lives: ${lives} `
 
-
-//TODO: Find a way to make the lives decrease and the values to become visible as they
-//decrease.
-
-//TODO: Find a way to display whether the values are too high, too low or correct.
-//TODO: Find a way of making the game continuous until the lives end.
-
-//OPTIONAL TODO: find a way to delete all other messages when showing if someone has won or lost
-
-let checkGuess = () => {
-    randomInRange(minVal, maxVal);
-    let guessInput = Number(guessField.value);
-
-    if (askGuess(guessInput) !== true) {
-        checkGuess();
-    } else {
-        
+      if (lives <= 0) {
+        if (guessOutput !== number) {
+           guessedVal.innerHTML += `
+            <div id = "results">
+            <p> Game over! The correct number was ${guessOutput}.</p>
+            </div>
+            `;
+            
+        }
+          guessSubmit.disabled = true;
     }
-}
+  };
 
 
-submit.addEventListener("click", askRange);
-guessSubmit.addEventListener("click", checkGuess);
+  let checkGuess = (result) => {
+    let guessInput = Number(result);
+    askGuess(guessInput);
+  };
+
+  submit.addEventListener("click", askRange);
+
